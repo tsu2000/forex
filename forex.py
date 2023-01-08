@@ -251,7 +251,7 @@ def timeseries(full_currency_list):
                              full_currency_list, 
                              full_currency_list.index(st.session_state['baseCurr']))
 
-    cur_full = st.selectbox('Choose the currency to convert to:', 
+    cur_full = st.selectbox('Choose the currency to convert from:', 
                             full_currency_list, 
                             full_currency_list.index(st.session_state['convertedCurr']))
 
