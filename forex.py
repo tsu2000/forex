@@ -29,7 +29,6 @@ def latest_data(date, base_cur):
     return data
 
 def main():
-
     col1, col2, col3 = st.columns([0.045, 0.265, 0.025])
     
     with col1:
@@ -216,9 +215,9 @@ def main():
 
     st.markdown('### 💱 &nbsp; Foreign Currency Exchange Rates (FOREX) App')
 
-    st.markdown('A simple foreign currency conversion web application. Users can view the current exchange rates, and historical exchange rates between 2 currencies from 2 selected dates, beginning from 1999. **Disclaimer:** Not all data shown may be accurate or available. View the source of the API used [**here**](<https://exchangerate.host/#/>).')
+    st.markdown('A simple foreign currency conversion web application. Users can view the current exchange rates by selecting a base currency, and historical exchange rates between 2 currencies from 2 selected dates beginning from 1999. **Disclaimer:** Not all data shown may be accurate or available. (API used: [**Source**](<https://exchangerate.host/#/>))')
 
-    opt = st.selectbox('Choose type of FOREX data:', ['Historical Exchange Rate Data', 'Current Exchange Rates'])
+    opt = st.selectbox('Select a feature:', ['Historical Exchange Rate Data', 'Current Exchange Rates'])
 
     st.markdown('---')
 
@@ -386,6 +385,13 @@ def latest(full_currency_dict):
     base = st.selectbox('Select base currency:', list(full_currency_dict.keys()))
     basecode = base[:3]
 
+    units = st.number_input('Choose quantity of monetary units for the currency:', 
+                            value = 1.000000,
+                            min_value = 0.000000,
+                            max_value = 10000000000.000000,
+                            step = 0.000001,
+                            format = '%0.6f')
+
     try:
         today = latest_data(datetime.date.today(), basecode)['rates']
         yesterday = latest_data(datetime.date.today() - datetime.timedelta(days = 1), basecode)['rates']
@@ -408,7 +414,9 @@ def latest(full_currency_dict):
     df = pd.DataFrame(list(zip(curr_list, emoji_list, today_list, yesterday_list)),
                       columns = ['Currency', 'Emoji', 'Today', 'Yesterday'])
     df['Percent Change'] = (df['Today'] - df['Yesterday']) / df['Yesterday'] * 100
+    df['Today'] *= units
     df = df.set_index('Currency')
+    df = df.round({'Percent Change': 4, 'Today': 6})
 
     currs = st.multiselect('Select the currencies you wish to view the exchange rate for:', 
                            list(full_currency_dict.keys()),
@@ -423,7 +431,7 @@ def latest(full_currency_dict):
                            max_selections = 30)
 
     st.markdown('---')
-    st.markdown(f'##### 1 Unit of :blue[{base}] is equal to:')
+    st.markdown(f'##### :blue[{units}] Unit(s) of :blue[{base}] is equal to:')
 
     def create_metric(currSpec):
         return st.metric(f"{df.loc[currSpec]['Emoji']} {currSpec}", 
@@ -437,6 +445,8 @@ def latest(full_currency_dict):
     with col2:
         for curr in currs[1::2]:
             create_metric(curr)
+    
+    st.markdown('---')
 
 
 if __name__ == "__main__":
