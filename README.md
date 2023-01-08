@@ -1,6 +1,6 @@
 # forex
 
-A simple dashboard application which allows users to view a simple statistical overview of their Telegram chat data.
+A simple foreign currency conversion web application. Users can view the current and historical exchange rates between 2 currencies from 2 selected dates, as early as exchange rates from 1999.
 
 **Available features**:
 - Metrics regarding chat users (≥ 1 message in chat), total number of messages and age of chat group.
@@ -10,14 +10,10 @@ A simple dashboard application which allows users to view a simple statistical o
 - Word Cloud showing the most frequently used words (200 words max).
 
 **Known limitations**:
-- Only accepts `.json` files for processing.
-- File size limited to <200MB for now. If multiple files added, around 250MB total. **DO NOT EXCEED THIS YOU WILL 100% CRASH THE APP**
-- Chat group age may not be completely accurate for certain chats
+- Not all currencies have available data dating back to 1999.
+- Not all data shown may be accurate or available. Cross-reference the exchange rate with other platforms to check the accuracy of the exchange rate.
 
 **Link to Web App**:
 
 [<img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg">](<https://tele-dash.streamlit.app>)
 
-**Instructions to export Telegram chats as `.JSON` files**:
-
-[<img src="https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white">](<https://github.com/tsu2000/tele_dashboard/blob/main/instructions.md>)
