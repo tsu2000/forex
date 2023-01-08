@@ -7,3 +7,6 @@ json5==0.9.6
 datetime==4.5
 streamlit_extras==0.2.4
 Pillow==9.2.0
+xlsxwriter==3.0.3
+kaleido==0.2.1
+openpyxl==3.0.10
