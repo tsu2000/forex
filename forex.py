@@ -418,7 +418,7 @@ def latest(full_currency_dict):
     df = df.set_index('Currency')
     df = df.round({'Percent Change': 4, 'Today': 6})
 
-    currs = st.multiselect('Select the currencies you wish to view the exchange rate for:', 
+    currs = st.multiselect('Select the currencies you wish to view the exchange rate (and daily change in %) for:', 
                            list(full_currency_dict.keys()),
                            default = ['USD - United States (US) Dollar',
                                       'EUR - Euro',
