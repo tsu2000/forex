@@ -264,21 +264,21 @@ def timeseries(full_currency_list):
 
     with col_left:
         start_choice = st.date_input('Select start date (YYYY/MM/DD):', 
-                                     datetime.date(2022, 1, 1), 
+                                     value = datetime.date.today() - datetime.timedelta(days = 365), 
                                      min_value = datetime.date(1999, 1, 1),
                                      max_value = datetime.date.today())
 
     with col_right:
-        if start_choice < end_choice:
-            st.error("End date cannot be earlier than start date.")
-            st.stop()
         end_choice = st.date_input('Select end date (YYYY/MM/DD):',
-                                   datetime.date(2022, 12, 31), 
-                                   min_value = start_choice,
-                                   max_value = datetime.date.today())
+                                   value = datetime.date.today() - datetime.timedelta(days = 1), 
+                                   min_value = datetime.date(1999, 1, 1),
+                                   max_value = datetime.date.today() - datetime.timedelta(days = 1))
+        
+    if start_choice < end_choice:
+        st.error("End date cannot be earlier than start date.")
+        st.stop()
 
     # Final initialisation of DataFrame
-    st.write(start_choice > end_choice)
     days_timedelta = end_choice - start_choice
     days_left = days_timedelta.days
 
