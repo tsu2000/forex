@@ -13,7 +13,7 @@ from PIL import Image
 from streamlit_extras.badges import badge
 
 # Obtaining data from Exchange Rate API
-@st.experimental_singleton
+@st.cache_resource
 def timeseries_data(start_date, end_date, cur, base_cur):
     # Obtaining up-to-date data for application
     api_url = f'https://api.exchangerate.host/timeseries?start_date={start_date}&end_date={end_date}&symbols={cur}&base={base_cur}'
@@ -21,7 +21,7 @@ def timeseries_data(start_date, end_date, cur, base_cur):
     
     return data
 
-@st.experimental_singleton
+@st.cache_resource
 def latest_data(date, base_cur):
     api_url = f'https://api.exchangerate.host/{date}?base={base_cur}'
     data = requests.get(api_url).json()
@@ -345,7 +345,7 @@ def timeseries(full_currency_list):
         worksheet.set_column('A:A', 15)
 
         # Saving and returning data
-        writer.save()
+        writer.close()
         processed_data = output.getvalue()
 
         return processed_data
