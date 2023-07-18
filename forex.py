@@ -275,6 +275,9 @@ def timeseries(full_currency_list):
                                    max_value = datetime.date.today())
 
     # Final initialisation of DataFrame
+    if end_choice < start_choice:
+        st.error("End date cannot be earlier than start date.")
+        st.stop()
     days_timedelta = end_choice - start_choice
     days_left = days_timedelta.days
     
