@@ -269,6 +269,9 @@ def timeseries(full_currency_list):
                                      max_value = datetime.date.today())
 
     with col_right:
+        if start_choice < end_choice:
+            st.error("End date cannot be earlier than start date.")
+            st.stop()
         end_choice = st.date_input('Select end date (YYYY/MM/DD):',
                                    datetime.date(2022, 12, 31), 
                                    min_value = start_choice,
@@ -278,10 +281,6 @@ def timeseries(full_currency_list):
     st.write(start_choice > end_choice)
     days_timedelta = end_choice - start_choice
     days_left = days_timedelta.days
-
-    if days_left < 0:
-        st.error("End date cannot be earlier than start date.")
-        st.stop()
 
     if days_left > 365:
         dict_alldays = {}
