@@ -275,6 +275,7 @@ def timeseries(full_currency_list):
                                    max_value = datetime.date.today())
 
     # Final initialisation of DataFrame
+    st.write(start_choice > end_choice)
     days_timedelta = end_choice - start_choice
     days_left = days_timedelta.days
 
