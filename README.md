@@ -2,6 +2,8 @@
 
 A simple foreign currency conversion web application. Users can view the current and historical exchange rates between 2 currencies from 2 selected dates, with exchange rate data as early as 1999.
 
+![forex](https://github.com/tsu2000/forex/assets/106811131/ae00cf63-2bf5-4ecf-aba7-215035f077b8)
+
 **Available features**:
 - Interactive line chart showing historical exchange rates between 2 different currencies.
 - Ability to download aforementioned daily/monthly historical exchange rate data to an Excel file.
